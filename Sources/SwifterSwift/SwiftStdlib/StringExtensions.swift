@@ -58,6 +58,10 @@ public extension String {
         let plainData = data(using: .utf8)
         return plainData?.base64EncodedString()
     }
+    
+    var base: String? {
+        return self.base64Encoded?.replacingOccurrences(of: "/", with: "_").replacingOccurrences(of: "+", with: "-")
+    }
     #endif
 
     /// SwifterSwift: Array of characters of a string.

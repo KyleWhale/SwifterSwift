@@ -66,6 +66,20 @@ public extension Dictionary {
     #if canImport(Foundation)
     /// SwifterSwift: JSON String from dictionary.
     ///
+    /// - Parameter prettify: set true to prettify data (default is false).
+    /// - Returns: optional JSON Data (if applicable).
+    func jsonString() -> String {
+        if let data = try? JSONSerialization.data(withJSONObject: self, options: []),
+           let string = String(data: data, encoding: .utf8) {
+            return string
+        }
+        return ""
+    }
+    #endif
+
+    #if canImport(Foundation)
+    /// SwifterSwift: JSON String from dictionary.
+    ///
     ///        dict.jsonString() -> "{"testKey":"testValue","testArrayKey":[1,2,3,4,5]}"
     ///
     ///        dict.jsonString(prettify: true)
