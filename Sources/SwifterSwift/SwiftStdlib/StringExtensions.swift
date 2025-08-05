@@ -1429,6 +1429,15 @@ public extension String {
         guard let range = Range(bounds, in: self) else { fatalError("Failed to find range \(bounds) in \(self)") }
         return self[range]
     }
+    
+    /// quotes
+    var q: String {
+        "'\(self)'"
+    }
+    /// brackets
+    var b: String {
+        "(\(self))"
+    }
 }
 
 #endif
