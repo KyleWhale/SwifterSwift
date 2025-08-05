@@ -1264,6 +1264,10 @@ public extension String {
         guard let decodedData = Data(base64Encoded: base64) else { return nil }
         self.init(data: decodedData, encoding: .utf8)
     }
+    
+    var data: Data? {
+        Data(base64Encoded: self)
+    }
     #endif
 }
 

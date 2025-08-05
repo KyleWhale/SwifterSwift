@@ -90,6 +90,10 @@ public extension Int {
         let number = Double(abs)
         return Int(log10(number) + 1)
     }
+    
+    var data: Data {
+        Data(count: self)
+    }
 }
 
 // MARK: - Methods
