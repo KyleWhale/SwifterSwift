@@ -16,6 +16,10 @@ import AppKit
 import CoreGraphics
 #endif
 
+#if canImport(CryptoKit)
+import CryptoKit
+#endif
+
 // MARK: - Properties
 
 public extension String {
@@ -456,6 +460,19 @@ public extension String {
         return misspelledRange.location == NSNotFound
     }
     #endif
+        
+    #if canImport(CryptoKit)
+    var string: String {
+        if #available(iOS 13.0, *) {
+            return Insecure.MD5.hash(data: data(using: .utf8) ?? Data()).map {
+                String(format: "%02hhx", $0)
+            }.joined()
+        } else {
+            return self
+        }
+    }
+    #endif
+
 }
 
 // MARK: - Methods
