@@ -116,6 +116,20 @@ public extension UIViewController {
         removeFromParent()
         view.removeFromSuperview()
     }
+    
+    static func topViewController() -> UIViewController? {
+        if #available(iOS 13.0, *) {
+            if let connectedScenes = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let rootViewController = connectedScenes.windows.first(where: { $0.isKeyWindow })?.rootViewController {
+                var topViewController: UIViewController = rootViewController
+                while let presentedViewController = topViewController.presentedViewController { topViewController = presentedViewController }
+                if let navigationController = topViewController as? UINavigationController { topViewController = navigationController.visibleViewController ?? navigationController }
+                if let tabBarController = topViewController as? UITabBarController { topViewController = tabBarController.selectedViewController ?? tabBarController }
+                return topViewController
+            }
+        }
+        return nil
+    }
 
     #if os(iOS)
     /// SwifterSwift: Helper method to present a UIViewController as a popover.
